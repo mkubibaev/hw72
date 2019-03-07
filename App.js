@@ -1,12 +1,18 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from "redux";
+import thunkMiddleware from 'redux-thunk';
+import picturesReducer from './src/store/picturesReducer';
+import Pictures from "./src/containers/Pictures/Pictures";
+
+const store = createStore(picturesReducer, applyMiddleware(thunkMiddleware));
 
 export default class App extends React.Component {
     render() {
         return (
-            <View>
-                <Text>Open up App.js to start working on your app!</Text>
-            </View>
+            <Provider store={store}>
+                <Pictures/>
+            </Provider>
         );
     }
 }
